@@ -8,13 +8,18 @@ const AllArticle = () => {
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const [publisher, setPublisher] = useState(" ");
+
+  const approvedArticles = data.filter(
+    (article) => article.status === "approve"
+  );
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const res = await axiosSecure.get(
-          `/allblog?filter=${filter}&search=${search}`
+          `/allblog?filter=${filter}&search=${search}&publisher=${publisher}`
         );
         setData(res.data);
       } catch (error) {
@@ -24,7 +29,7 @@ const AllArticle = () => {
     };
 
     fetchData();
-  }, [filter, search]);
+  }, [filter, publisher, search]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -47,6 +52,17 @@ const AllArticle = () => {
           <option value="health">Health</option>
           <option value="education">Education</option>
         </select>
+        <select
+          onChange={(e) => setPublisher(e.target.value)} // Change to setPublisherFilter
+          value={publisher}
+          name="publisher"
+          id="publisher"
+          className="border p-3 rounded-lg"
+        >
+          <option value="">Filter By Publisher</option>
+          <option value="utpolra">utpolra</option>
+          <option value="utpolray">utpolray</option>
+        </select>
         <form onSubmit={handleSearch}>
           <div className="flex p-1 overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
             <input
@@ -68,7 +84,7 @@ const AllArticle = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-          {data.map((article, index) => (
+          {approvedArticles?.map((article, index) => (
             <Card key={index} className="">
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {article.title}
