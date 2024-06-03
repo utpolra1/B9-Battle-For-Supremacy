@@ -16,6 +16,7 @@ import AllArticles from "./Component/Dashboard/Page/AllArticles.jsx";
 import AddPublisher from "./Component/Dashboard/Page/AddPublisher.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import MyArticle from "./Component/MyArticle/MyArticle.jsx";
+import AllArticle from "./Component/AllArticle/AllArticle.jsx";
 
 // Create the router configuration
 const router = createBrowserRouter([
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path:'/myarticle',
         element:<MyArticle></MyArticle>
+      },
+      {
+        path:'/allArticle',
+        element:<AllArticle></AllArticle>
       }
     ],
   },

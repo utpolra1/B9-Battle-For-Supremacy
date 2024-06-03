@@ -45,8 +45,6 @@ const Navbar = () => {
 
   //find email login user backend
   const loggedInUser = users.find((u) => u.email === user?.email);
-  console.log("Logged In User:", loggedInUser);
-
 
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -55,6 +53,9 @@ const Navbar = () => {
       </NavLink>
       <NavLink to="addArticle" className="btn-outline">
         Add Article
+      </NavLink>
+      <NavLink to="allArticle" className="btn-outline">
+        All Article
       </NavLink>
       <NavLink className="btn-outline">Subscription</NavLink>
       <NavLink className="btn-outline">Premium Artilce</NavLink>
