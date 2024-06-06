@@ -3,6 +3,7 @@ import { Table } from "flowbite-react";
 import UseAxiosSecure from "../../Axios/UseAxiosScoure";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const AllArticles = () => {
   const axiosSecure = UseAxiosSecure();
@@ -13,13 +14,49 @@ const AllArticles = () => {
       return res.data;
     },
   });
-
   const handleMakeApprove = (blogs) => {
     axiosSecure.patch(`/blog/aproved/${blogs._id}`).then((res) => {
       console.log(res.data);
       if (res.data.modifiedCount > 0) {
         refetch();
         toast.success("blog Approved Sucesss");
+      }
+    });
+  };
+
+  //handle delete
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/blog/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your blog has been deleted.",
+                icon: "success",
+              });
+
+              const remainingBlogs = blogs.filter(blog => blog._id !== id);
+              refetch();
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting blog:", error);
+            Swal.fire({
+              title: "Error!",
+              text: "There was a problem deleting your blog.",
+              icon: "error",
+            });
+          });
       }
     });
   };
@@ -49,10 +86,10 @@ const AllArticles = () => {
             {blogs?.map((blogs) => (
               <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                 <Table.Cell>{blogs?.title}</Table.Cell>
-                <Table.Cell>{blogs?.title}</Table.Cell>
+                <Table.Cell>{blogs?.username}</Table.Cell>
                 <Table.Cell>{blogs?.email}</Table.Cell>
-                <Table.Cell>{blogs?.photo}</Table.Cell>
-                <Table.Cell>{blogs?.title}</Table.Cell>
+                <Table.Cell><img src={blogs?.userphoto}></img> </Table.Cell>
+                <Table.Cell>{blogs?.date}</Table.Cell>
                 <Table.Cell>{blogs?.status}</Table.Cell>
                 <Table.Cell>{blogs?.publisher}</Table.Cell>
                 <Table.Cell>
@@ -67,7 +104,12 @@ const AllArticles = () => {
                   <button className="btn">Decline</button>
                 </Table.Cell>
                 <Table.Cell>
-                  <button className="btn">Delete</button>
+                  <button
+                    className="btn"
+                    onClick={() => handleDelete(blogs?._id)}
+                  >
+                    Delete
+                  </button>
                 </Table.Cell>
                 <Table.Cell>
                   <button className="btn">Premium</button>

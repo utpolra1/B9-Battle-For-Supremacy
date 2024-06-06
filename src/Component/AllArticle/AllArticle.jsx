@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card } from "flowbite-react";
 import UseAxiosSecure from "../Axios/UseAxiosScoure";
+import ViewDatilsButton from "../Home/ViewDatilsButton";
+import { NavLink } from "react-router-dom";
+// Helper function to truncate text
+const truncateText = (text, wordLimit) => {
+  const words = text.split(" ");
+  if (words.length > wordLimit) {
+    return words.slice(0, wordLimit).join(" ") + "...";
+  }
+  return text;
+};
 
 const AllArticle = () => {
   const axiosSecure = UseAxiosSecure();
@@ -86,28 +96,17 @@ const AllArticle = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           {approvedArticles?.map((article, index) => (
             <Card key={index} className="">
+              <img src={
+                article?.image
+              } alt="" />
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {article.title}
               </h5>
               <p className="font-normal text-gray-700 dark:text-gray-400">
-                {article.description}
+              {truncateText(article?.description, 40)}
               </p>
-              <p>{article.tag}</p>
-              <Button>
-                Read more
-                <svg
-                  className="-mr-1 ml-2 h-4 w-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </Button>
+              <p>#{article.tag}</p>
+              <NavLink to={`/blogdetails/${article?._id}`}><ViewDatilsButton articleId={article?._id}></ViewDatilsButton></NavLink>
             </Card>
           ))}
         </div>

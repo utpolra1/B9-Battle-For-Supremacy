@@ -3,6 +3,10 @@ import { Table } from "flowbite-react";
 import UseAxiosSecure from "../Axios/UseAxiosScoure";
 import { useQuery } from "@tanstack/react-query";
 import { authContext } from "../../Firebase/AuthProvider";
+import { NavLink } from "react-router-dom";
+import ViewDatilsButton from "../Home/ViewDatilsButton";
+import Swal from "sweetalert2";
+
 const MyArticle = () => {
   const { user } = useContext(authContext);
   const axiosSecure = UseAxiosSecure();
@@ -16,6 +20,43 @@ const MyArticle = () => {
   });
 
   const userBlogs = blogs.filter((blog) => blog.email === user?.email);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/blog/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your blog has been deleted.",
+                icon: "success",
+              });
+
+              const remainingBlogs = blogs.filter(blog => blog._id !== id);
+              refetch();
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting blog:", error);
+            Swal.fire({
+              title: "Error!",
+              text: "There was a problem deleting your blog.",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
+
   
   return (
     <div>
@@ -46,13 +87,13 @@ const MyArticle = () => {
                 <Table.Cell>{data.status}</Table.Cell>
                 <Table.Cell>{data.isPremium ? 'Yes' : 'No'}</Table.Cell>
                 <Table.Cell>
-                  <button className="btn">View</button>
+                <NavLink to={`/blogdetails/${data?._id}`}><ViewDatilsButton articleId={data?._id}></ViewDatilsButton></NavLink>
                 </Table.Cell>
                 <Table.Cell>
                   <button className="btn">Update</button>
                 </Table.Cell>
                 <Table.Cell>
-                  <button className="btn">Delete</button>
+                <button className="btn" onClick={() => handleDelete(data?._id)}>Delete</button>
                 </Table.Cell>
               </Table.Row>
             ))}

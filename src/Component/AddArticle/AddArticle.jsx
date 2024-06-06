@@ -6,7 +6,8 @@ import { authContext } from "../../Firebase/AuthProvider";
 const AddArticle = () => {
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
-  const {user}=useContext(authContext);
+  const { user } = useContext(authContext);
+  console.log(user);
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
@@ -33,9 +34,12 @@ const AddArticle = () => {
     const publisher = e.target.publisher.value;
     const description = e.target.description.value;
     const tag = e.target.tags.value;
-    const email=user?.email;
-    const status='pandding';
-    
+    const email = user?.email;
+    const status = "pandding";
+    const count = 0;
+    const username = user?.displayName;
+    const userphoto = user?.photoURL;
+    const date = new Date().toLocaleString();
     const newblog = {
       title,
       description,
@@ -43,10 +47,14 @@ const AddArticle = () => {
       publisher,
       image,
       email,
-      status
+      status,
+      count,
+      username,
+      userphoto,
+      date,
     };
-    console.log(newblog)
-  
+    console.log(newblog);
+
     fetch("http://localhost:5000/blog", {
       method: "POST",
       headers: {
@@ -60,7 +68,7 @@ const AddArticle = () => {
         toast.success("Blog Added Success");
       });
   };
-  
+
   return (
     <div className="flex justify-center text-center mt-5">
       <div class="relative flex flex-col text-gray-700 bg-transparent shadow-none rounded-xl bg-clip-border">

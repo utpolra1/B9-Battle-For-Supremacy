@@ -17,6 +17,8 @@ import AddPublisher from "./Component/Dashboard/Page/AddPublisher.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import MyArticle from "./Component/MyArticle/MyArticle.jsx";
 import AllArticle from "./Component/AllArticle/AllArticle.jsx";
+import BlogDeatils from "./Component/Home/BlogDeatils.jsx";
+import Subscription from "./Component/Subscription/Subscription.jsx";
 
 // Create the router configuration
 const router = createBrowserRouter([
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
       {
         path:'/allArticle',
         element:<AllArticle></AllArticle>
+      },
+      {
+        path: "/blogdetails/:_id",
+        element:<BlogDeatils></BlogDeatils>
+      },
+      {
+        path:'/subscription/:price',
+        element:<Subscription></Subscription>
       }
     ],
   },

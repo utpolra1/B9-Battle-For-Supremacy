@@ -51,13 +51,13 @@ const Navbar = () => {
       <NavLink to="/" className="btn-outline">
         Home
       </NavLink>
-      <NavLink to="addArticle" className="btn-outline">
+      <NavLink to="/addArticle" className="btn-outline">
         Add Article
       </NavLink>
-      <NavLink to="allArticle" className="btn-outline">
+      <NavLink to="/allArticle" className="btn-outline">
         All Article
       </NavLink>
-      <NavLink className="btn-outline">Subscription</NavLink>
+      <NavLink to='/subscription' className="btn-outline">Subscription</NavLink>
       <NavLink className="btn-outline">Premium Artilce</NavLink>
       <NavLink to='/myarticle' className="btn-outline">My Article</NavLink>
       {loggedInUser?.role === "admin" && (
@@ -69,7 +69,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="mx-auto max-w-screen-xl px-4 py-2 lg:px-8 lg:py-4">
+    <div className="mx-auto py-2 lg:py-4">
       <div className="container mx-auto flex items-center justify-between text-blue-gray-900 bg-blue-gray-50 p-2">
         <Typography
           as="a"

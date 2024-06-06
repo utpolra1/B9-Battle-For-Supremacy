@@ -11,24 +11,25 @@ const UserStatic = () => {
       return res.data;
     },
   });
+  const paiduser = users.filter(users => users?.paid === 'paid'); // Use find instead of filter
+  const normaluser =(users.length - paiduser.length);
   return (
     <div>
       <div className="stats shadow my-10 flex items-center">
         <div className="stat place-items-center">
           <div className="stat-title">All user</div>
           <div className="stat-value">{users?.length}</div>
-          <div className="stat-desc">From January 1st to February 1st</div>
         </div>
 
         <div className="stat place-items-center">
           <div className="stat-title">Normal User</div>
-          <div className="stat-value text-secondary">4,200</div>
+          <div className="stat-value text-secondary">{normaluser}</div>
           <div className="stat-desc text-secondary">↗︎ 40 (2%)</div>
         </div>
 
         <div className="stat place-items-center">
           <div className="stat-title">Premium users</div>
-          <div className="stat-value">1,200</div>
+          <div className="stat-value">{paiduser?.length}</div>
           <div className="stat-desc">↘︎ 90 (14%)</div>
         </div>
       </div>

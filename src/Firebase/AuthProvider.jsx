@@ -21,6 +21,7 @@ const AuthProvider = ({ children }) => {
       photo:user?.photoURL,
       role: 'guest',
       status: 'Verified',
+      paid:'Unpaid'
     };
     try {
       const { data } = await axios.put('http://localhost:5000/user', currentUser);
