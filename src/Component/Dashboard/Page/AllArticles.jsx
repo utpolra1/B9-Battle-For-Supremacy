@@ -36,7 +36,8 @@ const AllArticles = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/blog/${id}`)
+        axiosSecure
+          .delete(`/blog/${id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               Swal.fire({
@@ -45,7 +46,7 @@ const AllArticles = () => {
                 icon: "success",
               });
 
-              const remainingBlogs = blogs.filter(blog => blog._id !== id);
+              const remainingBlogs = blogs.filter((blog) => blog._id !== id);
               refetch();
             }
           })
@@ -57,6 +58,17 @@ const AllArticles = () => {
               icon: "error",
             });
           });
+      }
+    });
+  };
+
+  //blogPremium
+  const handlePremium = (blogs) => {
+    axiosSecure.patch(`/blog/premium/${blogs._id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        toast.success("blog premium Sucesss");
       }
     });
   };
@@ -88,7 +100,9 @@ const AllArticles = () => {
                 <Table.Cell>{blogs?.title}</Table.Cell>
                 <Table.Cell>{blogs?.username}</Table.Cell>
                 <Table.Cell>{blogs?.email}</Table.Cell>
-                <Table.Cell><img src={blogs?.userphoto}></img> </Table.Cell>
+                <Table.Cell>
+                  <img src={blogs?.userphoto}></img>{" "}
+                </Table.Cell>
                 <Table.Cell>{blogs?.date}</Table.Cell>
                 <Table.Cell>{blogs?.status}</Table.Cell>
                 <Table.Cell>{blogs?.publisher}</Table.Cell>
@@ -96,6 +110,7 @@ const AllArticles = () => {
                   <button
                     onClick={() => handleMakeApprove(blogs)}
                     className="btn"
+                    disabled={blogs?.status === "approve"}
                   >
                     Approve Now
                   </button>
@@ -112,7 +127,13 @@ const AllArticles = () => {
                   </button>
                 </Table.Cell>
                 <Table.Cell>
-                  <button className="btn">Premium</button>
+                  <button
+                    onClick={() => handlePremium(blogs)}
+                    className="btn"
+                    disabled={blogs?.paid === "premium"}
+                  >
+                    Premium
+                  </button>
                 </Table.Cell>
               </Table.Row>
             ))}
