@@ -19,6 +19,7 @@ import MyArticle from "./Component/MyArticle/MyArticle.jsx";
 import AllArticle from "./Component/AllArticle/AllArticle.jsx";
 import BlogDeatils from "./Component/Home/BlogDeatils.jsx";
 import Subscription from "./Component/Subscription/Subscription.jsx";
+import PremiumArtilce from "./Component/PremiumArticle/PremiumArtilce.jsx";
 
 // Create the router configuration
 const router = createBrowserRouter([
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path:'/subscription/:price',
         element:<Subscription></Subscription>
+      },
+      {
+        path:'/premiumartilce',
+        element:<PremiumArtilce></PremiumArtilce>
       }
     ],
   },

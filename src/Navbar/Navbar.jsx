@@ -58,7 +58,7 @@ const Navbar = () => {
         All Article
       </NavLink>
       <NavLink to='/subscription' className="btn-outline">Subscription</NavLink>
-      <NavLink className="btn-outline">Premium Artilce</NavLink>
+      <NavLink to='/premiumartilce' className="btn-outline">Premium Artilce</NavLink>
       <NavLink to='/myarticle' className="btn-outline">My Article</NavLink>
       {loggedInUser?.role === "admin" && (
         <NavLink to="dashboard/allusers" className="btn-outline">
