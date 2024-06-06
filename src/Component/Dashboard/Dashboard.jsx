@@ -16,9 +16,10 @@ const Dashboard = () => {
           <li>
             <NavLink className='flex items-center gap-2 text-center' to="/dashboard/addpublisher"><MdOutlinePublishedWithChanges />Add Publisher</NavLink>
           </li>
-          <div className="divider"></div> 
+          <div className="divider">
+          </div>
+          <NavLink className='flex gap-2 text-center items-center' to='/'><FaHome></FaHome> Home</NavLink>
         </ul>
-        
       </div>
       <div className="flex-1">
         <Outlet></Outlet>

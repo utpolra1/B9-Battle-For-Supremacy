@@ -7,7 +7,6 @@ const AddArticle = () => {
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const { user } = useContext(authContext);
-  console.log(user);
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
@@ -53,8 +52,7 @@ const AddArticle = () => {
       userphoto,
       date,
     };
-    console.log(newblog);
-
+    
     fetch("http://localhost:5000/blog", {
       method: "POST",
       headers: {

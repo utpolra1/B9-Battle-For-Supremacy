@@ -1,6 +1,14 @@
-
 import React, { createContext, useEffect, useState } from "react";
-import {GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
 import App from "./firebase.config";
 import axios from "axios";
 
@@ -10,7 +18,7 @@ const provider = new GoogleAuthProvider();
 const auth = getAuth(App);
 
 const AuthProvider = ({ children }) => {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   const [user, setuser] = useState(null);
 
   // save user
@@ -18,16 +26,19 @@ const AuthProvider = ({ children }) => {
     const currentUser = {
       email: user?.email,
       name: user?.displayName,
-      photo:user?.photoURL,
-      role: 'guest',
-      status: 'Verified',
-      paid:'Unpaid'
+      photo: user?.photoURL,
+      role: "guest",
+      status: "Verified",
+      paid: "Unpaid",
     };
     try {
-      const { data } = await axios.put('http://localhost:5000/user', currentUser);
+      const { data } = await axios.put(
+        "http://localhost:5000/user",
+        currentUser
+      );
       return data;
     } catch (error) {
-      console.error('Error saving user:', error);
+      console.error("Error saving user:", error);
       // Handle error appropriately
     }
   };
@@ -46,22 +57,23 @@ const AuthProvider = ({ children }) => {
   }, [auth]);
 
   const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password)
-  }
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
-  const googleLogin=()=>{
-    return signInWithPopup(auth, provider)
-  }
+  const googleLogin = () => {
+    return signInWithPopup(auth, provider);
+  };
 
-  const updateProfilec=(name,photo)=>{
-    return updateProfile (auth.currentUser, {
-      displayName: name, photoURL: photo
-    })
-  }
+  const updateProfilec = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
 
-  const login=(email, password)=>{
-    return signInWithEmailAndPassword(auth, email, password)
-  }
+  const login = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
@@ -72,9 +84,9 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  const logout =()=>{
-    return signOut(auth)
-  }
+  const logout = () => {
+    return signOut(auth);
+  };
 
   const AuthInfo = {
     user,
@@ -83,11 +95,11 @@ const AuthProvider = ({ children }) => {
     login,
     googleLogin,
     logout,
-    loading
-    };
+    loading,
+  };
   return (
     <div>
-      <authContext.Provider value={AuthInfo} >{children}</authContext.Provider>
+      <authContext.Provider value={AuthInfo}>{children}</authContext.Provider>
     </div>
   );
 };
