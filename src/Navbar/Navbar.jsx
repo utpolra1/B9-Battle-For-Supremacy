@@ -60,10 +60,6 @@ const Navbar = () => {
       <NavLink to='/subscription/:price' className="btn-outline">Subscription</NavLink>
       <NavLink to='/premiumartilce' className="btn-outline">Premium Artilce</NavLink>
       <NavLink to='/myarticle' className="btn-outline">My Article</NavLink>
-      {loggedInUser?.role === "guest" && (
-        <NavLink to="userprofile" className="btn-outline">
-          Profile
-        </NavLink>)}
       {loggedInUser?.role === "admin" && (
         <NavLink to="dashboard/allusers" className="btn-outline">
           Dashboard
@@ -90,9 +86,11 @@ const Navbar = () => {
                 <div role="">
                   <div className="w-10 mr-2 rounded-full items-center flex justify-center">
                     <Tooltip content={user.displayName}>
+                      <NavLink to='/userprofile'>
                       <button className="avatar online">
                         <img alt="" src={user.photoURL} />
                       </button>
+                      </NavLink>
                     </Tooltip>
                   </div>
                 </div>
