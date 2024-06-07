@@ -7,6 +7,17 @@ import { useQuery } from "@tanstack/react-query";
 import { NavLink } from "react-router-dom";
 import { Button } from "flowbite-react";
 
+// Loader Component
+const Loader = () => {
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center w-full h-screen">
+          <span className="loading loading-ring w-28 h-28"></span>
+        </div>
+    </div>
+  );
+};
+
 // Helper function to truncate text
 const truncateText = (text, wordLimit) => {
   const words = text.split(" ");
@@ -42,7 +53,7 @@ const TrandingBlog = () => {
       });
   };
 
-  const { data: blogs = [], refetch } = useQuery({
+  const { data: blogs = [], isLoading, isError, error, refetch } = useQuery({
     queryKey: ["blogs"],
     queryFn: async () => {
       const res = await axiosSecure.get("/blog");
@@ -50,21 +61,25 @@ const TrandingBlog = () => {
     },
   });
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (isError) {
+    return <div>Error fetching data: {error.message}</div>;
+  }
+
   const approvedArticles = blogs.filter(
     (article) => article.status === "approve"
   );
 
-  // Ensure count is treated as a number before sorting
   approvedArticles.sort((a, b) => {
     const countA = Number(a.count);
     const countB = Number(b.count);
-    console.log(`Comparing: ${countA} with ${countB}`); // Debugging line
     return countB - countA;
   });
 
   const topArticles = approvedArticles.slice(0, 5);
-
-  console.log("Sorted articles:", approvedArticles); // Debugging line
 
   const onChange = (index, item) => {
     console.log(`Item ${index} changed:`, item);

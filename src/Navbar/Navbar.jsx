@@ -43,25 +43,31 @@ const Navbar = () => {
     };
   }, []);
 
-  //find email login user backend
+  // Find email of logged-in user from backend
   const loggedInUser = users.find((u) => u.email === user?.email);
 
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <NavLink to="/" className="btn-outline">
+      <NavLink to="/" className={({ isActive }) => isActive ? "btn-outline active-link" : "btn-outline"}>
         Home
       </NavLink>
-      <NavLink to="/addArticle" className="btn-outline">
+      <NavLink to="/addArticle" className={({ isActive }) => isActive ? "btn-outline active-link" : "btn-outline"}>
         Add Article
       </NavLink>
-      <NavLink to="/allArticle" className="btn-outline">
+      <NavLink to="/allArticle" className={({ isActive }) => isActive ? "btn-outline active-link" : "btn-outline"}>
         All Article
       </NavLink>
-      <NavLink to='/subscription/:price' className="btn-outline">Subscription</NavLink>
-      <NavLink to='/premiumartilce' className="btn-outline">Premium Artilce</NavLink>
-      <NavLink to='/myarticle' className="btn-outline">My Article</NavLink>
+      <NavLink to='/subscription/:price' className={({ isActive }) => isActive ? "btn-outline active-link" : "btn-outline"}>
+        Subscription
+      </NavLink>
+      <NavLink to='/premiumartilce' className={({ isActive }) => isActive ? "btn-outline active-link" : "btn-outline"}>
+        Premium Article
+      </NavLink>
+      <NavLink to='/myarticle' className={({ isActive }) => isActive ? "btn-outline active-link" : "btn-outline"}>
+        My Article
+      </NavLink>
       {loggedInUser?.role === "admin" && (
-        <NavLink to="dashboard/allusers" className="btn-outline">
+        <NavLink to="dashboard/allusers" className={({ isActive }) => isActive ? "btn-outline active-link" : "btn-outline"}>
           Dashboard
         </NavLink>
       )}
@@ -87,9 +93,9 @@ const Navbar = () => {
                   <div className="w-10 mr-2 rounded-full items-center flex justify-center">
                     <Tooltip content={user.displayName}>
                       <NavLink to='/userprofile'>
-                      <button className="avatar online">
-                        <img alt="" src={user.photoURL} />
-                      </button>
+                        <button className="avatar online">
+                          <img alt="" src={user.photoURL} />
+                        </button>
                       </NavLink>
                     </Tooltip>
                   </div>

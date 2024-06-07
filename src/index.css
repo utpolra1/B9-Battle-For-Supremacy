@@ -8,3 +8,10 @@
     padding-left: 1rem;
     padding-right: 1rem;
   }
+
+  .active-link {
+    background-color: #d3d3d3; /* Adjust the color as needed */
+    border-radius: 8px;
+    padding: 5px 10px;
+  }
+  
