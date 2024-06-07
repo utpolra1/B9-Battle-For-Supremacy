@@ -24,6 +24,7 @@ import UpdateArticle from "./Component/MyArticle/UpdateArticle.jsx";
 import PrivetRoute from "./Component/PrivateRoute/PrivateRoute.jsx";
 import { GiPrivate } from "react-icons/gi";
 import SubscribePremium from "./Component/PrivateRoute/SubCribePremium.jsx";
+import UserProfile from "./User/UserProfile.jsx";
 
 // Create the router configuration
 const router = createBrowserRouter([
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
       {
         path:"/updateBlog/:id",
         element:<UpdateArticle></UpdateArticle>
+      },
+      {
+        path:'/userprofile',
+        element:<UserProfile></UserProfile>
       }
     ],
   },
