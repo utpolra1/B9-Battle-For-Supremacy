@@ -63,8 +63,8 @@ const UserProfile = () => {
                     <h3 className="text-lg font-medium">User Details</h3>
                     <div className="mt-2 text-gray-700">
                         {/* Add more user details as needed */}
-                        <p><strong>Role:</strong> {loggedInUser?.role || 'N/A'}</p>
-                        <p className='flex items-center'><strong>Status:  {loggedInUser?.status} </strong> <MdVerified /></p>
+                        <p><strong>Role:</strong> {loggedInUser?.role}</p>
+                        <p className='flex items-center'><strong>Status:  {loggedInUser?.status} </strong> <MdVerified style={{ color: 'blue',fontSize: '20px' }} /></p>
                     </div>
                 </div>
             </div>
