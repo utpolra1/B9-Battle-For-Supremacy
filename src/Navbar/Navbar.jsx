@@ -60,6 +60,9 @@ const Navbar = () => {
       <NavLink to='/subscription/:price' className="btn-outline">Subscription</NavLink>
       <NavLink to='/premiumartilce' className="btn-outline">Premium Artilce</NavLink>
       <NavLink to='/myarticle' className="btn-outline">My Article</NavLink>
+      <NavLink to="/userprofile" className="btn-outline">
+        Profile
+      </NavLink>
       {loggedInUser?.role === "admin" && (
         <NavLink to="dashboard/allusers" className="btn-outline">
           Dashboard
