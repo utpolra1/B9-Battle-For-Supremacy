@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
@@ -9,6 +9,8 @@ const Login = () => {
   const [errorUser,seterrorUser]=useState(" ");
   const { login,googleLogin} = useContext(authContext);
   const [showPassword, setShowpassword]=useState(false);
+  const location=useLocation();
+  const navigate=useNavigate();
 
   const hanlelogin = (e) => {
     e.preventDefault();

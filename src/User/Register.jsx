@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { FaEye } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../Firebase/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
@@ -9,14 +9,15 @@ const Register = () => {
   const [error, seterror]=useState(" ");
   const [erroruser, seterrorUser]=useState(" ");
   const [showPassword, setShowpassword]=useState(false);
-
   const { user, createUser, updateProfile, googleLogin} =useContext(authContext)
+  const location=useLocation();
+  const navigate=useNavigate();
 
   const googlLogin = () => {
       googleLogin()
         .then((user) => {
           toast.success("SignUp Success");
-          // navigate(location?.state ? location.state : "/");
+          navigate(location?.state ? location.state : "/");
         })
         .catch((error) => console.log(error));
     };
@@ -71,7 +72,7 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         updateProfile(name, photo);
-        // navigate(location?.state ? location.state : "/");
+        navigate(location?.state ? location.state : "/");
         toast.success("SingUp Success");
       })
       .catch((error) => {

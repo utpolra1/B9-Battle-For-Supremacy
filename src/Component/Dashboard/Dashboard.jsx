@@ -7,7 +7,7 @@ import { NavLink, Outlet } from "react-router-dom";
 const Dashboard = () => {
   return (
     <div className="flex">
-      <div className="w-64 min-h-screen bg-orange-400">
+      <div className="w-64 min-h-screen bg-blue-500">
         <ul className="menu pb-4">
           <li>
             <NavLink className='flex items-center gap-2 text-center' to="/dashboard/allusers"><FaUser/>All users</NavLink>

@@ -6,6 +6,7 @@ import { authContext } from "../../Firebase/AuthProvider";
 import { NavLink } from "react-router-dom";
 import ViewDatilsButton from "../Home/ViewDatilsButton";
 import Swal from "sweetalert2";
+import UpdateArticle from "./UpdateArticle";
 
 const MyArticle = () => {
   const { user } = useContext(authContext);
@@ -32,7 +33,8 @@ const MyArticle = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/blog/${id}`)
+        axiosSecure
+          .delete(`/blog/${id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               Swal.fire({
@@ -41,7 +43,7 @@ const MyArticle = () => {
                 icon: "success",
               });
 
-              const remainingBlogs = blogs.filter(blog => blog._id !== id);
+              const remainingBlogs = blogs.filter((blog) => blog._id !== id);
               refetch();
             }
           })
@@ -57,7 +59,6 @@ const MyArticle = () => {
     });
   };
 
-  
   return (
     <div>
       <div className="overflow-x-auto">
@@ -75,7 +76,7 @@ const MyArticle = () => {
             </Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-          {userBlogs.map((data, index) => (
+            {userBlogs.map((data, index) => (
               <Table.Row
                 key={index}
                 className="bg-white dark:border-gray-700 dark:bg-gray-800"
@@ -85,15 +86,24 @@ const MyArticle = () => {
                 </Table.Cell>
                 <Table.Cell>{data.title}</Table.Cell>
                 <Table.Cell>{data.status}</Table.Cell>
-                <Table.Cell>{data.isPremium ? 'Yes' : 'No'}</Table.Cell>
+                <Table.Cell>{data.isPremium ? "Yes" : "No"}</Table.Cell>
                 <Table.Cell>
-                <NavLink to={`/blogdetails/${data?._id}`}><ViewDatilsButton articleId={data?._id}></ViewDatilsButton></NavLink>
+                  <NavLink to={`/blogdetails/${data?._id}`}>
+                    <ViewDatilsButton articleId={data?._id}></ViewDatilsButton>
+                  </NavLink>
                 </Table.Cell>
                 <Table.Cell>
-                  <button className="btn">Update</button>
+                  <NavLink to={`/updateBlog/${data?._id}`}>
+                    <button className="btn m-10">Update Blog</button>
+                  </NavLink>
                 </Table.Cell>
                 <Table.Cell>
-                <button className="btn" onClick={() => handleDelete(data?._id)}>Delete</button>
+                  <button
+                    className="btn"
+                    onClick={() => handleDelete(data?._id)}
+                  >
+                    Delete
+                  </button>
                 </Table.Cell>
               </Table.Row>
             ))}

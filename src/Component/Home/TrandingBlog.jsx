@@ -4,7 +4,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import UseAxiosSecure from "../Axios/UseAxiosScoure";
 import { useQuery } from "@tanstack/react-query";
-import ViewDatilsButton from "./ViewDatilsButton";
 import { NavLink } from "react-router-dom";
 import { Button } from "flowbite-react";
 
@@ -50,12 +49,25 @@ const TrandingBlog = () => {
       return res.data;
     },
   });
+
   const approvedArticles = blogs.filter(
     (article) => article.status === "approve"
   );
 
+  // Ensure count is treated as a number before sorting
+  approvedArticles.sort((a, b) => {
+    const countA = Number(a.count);
+    const countB = Number(b.count);
+    console.log(`Comparing: ${countA} with ${countB}`); // Debugging line
+    return countB - countA;
+  });
+
+  const topArticles = approvedArticles.slice(0, 5);
+
+  console.log("Sorted articles:", approvedArticles); // Debugging line
+
   const onChange = (index, item) => {
-    console.log(`Item ${index} clicked:`, item);
+    console.log(`Item ${index} changed:`, item);
   };
 
   const onClickItem = (index, item) => {
@@ -73,7 +85,7 @@ const TrandingBlog = () => {
       onClickItem={onClickItem}
       onClickThumb={onClickThumb}
     >
-      {approvedArticles.map((article, index) => (
+      {topArticles.map((article, index) => (
         <div key={index}>
           <img src={article.image} alt={`Legend ${index + 1}`} />
           <div className="legend">

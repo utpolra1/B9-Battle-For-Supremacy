@@ -20,6 +20,10 @@ import AllArticle from "./Component/AllArticle/AllArticle.jsx";
 import BlogDeatils from "./Component/Home/BlogDeatils.jsx";
 import Subscription from "./Component/Subscription/Subscription.jsx";
 import PremiumArtilce from "./Component/PremiumArticle/PremiumArtilce.jsx";
+import UpdateArticle from "./Component/MyArticle/UpdateArticle.jsx";
+import PrivetRoute from "./Component/PrivateRoute/PrivateRoute.jsx";
+import { GiPrivate } from "react-icons/gi";
+import SubscribePremium from "./Component/PrivateRoute/SubCribePremium.jsx";
 
 // Create the router configuration
 const router = createBrowserRouter([
@@ -34,7 +38,9 @@ const router = createBrowserRouter([
       },
       {
         path: "addArticle",
-        element: <AddArticle />,
+        element: <PrivetRoute>
+          <AddArticle/>
+        </PrivetRoute>,
       },
       {
         path: "/login",
@@ -46,7 +52,9 @@ const router = createBrowserRouter([
       },
       {
         path:'/myarticle',
-        element:<MyArticle></MyArticle>
+        element:<PrivetRoute>
+          <MyArticle></MyArticle>
+        </PrivetRoute>
       },
       {
         path:'/allArticle',
@@ -54,15 +62,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/blogdetails/:_id",
-        element:<BlogDeatils></BlogDeatils>
+        element:<PrivetRoute>
+          <BlogDeatils></BlogDeatils>
+        </PrivetRoute>
       },
       {
         path:'/subscription/:price',
-        element:<Subscription></Subscription>
+        element:<PrivetRoute>
+          <Subscription></Subscription>
+        </PrivetRoute>
       },
       {
         path:'/premiumartilce',
-        element:<PremiumArtilce></PremiumArtilce>
+        element:<PrivetRoute>
+          <SubscribePremium>
+          <PremiumArtilce></PremiumArtilce>
+          </SubscribePremium>
+        </PrivetRoute>
+      },
+      {
+        path:"/updateBlog/:id",
+        element:<UpdateArticle></UpdateArticle>
       }
     ],
   },

@@ -4,11 +4,14 @@ import { toast } from "react-toastify";
 import { authContext } from "../../Firebase/AuthProvider";
 import UseAxiosSecure from "../Axios/UseAxiosScoure";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AddArticle = () => {
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const { user } = useContext(authContext);
+  const location=useLocation();
+  const navigate=useNavigate();
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
@@ -78,6 +81,7 @@ const AddArticle = () => {
         toast.success("Blog Added Successfully");
         e.target.reset();
         setImageUrl("");
+        navigate(location?.state ? location.state : "/");
       });
   };
 
