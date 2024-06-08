@@ -49,7 +49,7 @@ const AllArticle = () => {
 
   return (
     <div>
-      <div className="flex justify-center py-5">
+      <div className="justify-center py-5 grid gap-3 lg:grid-cols-3">
         <select
           onChange={(e) => setFilter(e.target.value)}
           value={filter}

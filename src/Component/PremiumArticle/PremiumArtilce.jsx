@@ -31,7 +31,7 @@ const PremiumArticle = () => {
     <div>
       <h1>Premium Articles</h1>
       {approvedArticles.map((article) => (
-        <div className="article card border w-1/2 my-5 p-2">
+        <div className="article card border my-5 p-2">
           {article.image && (
             <img
               className="mx-auto rounded-lg w-[500px] h-[350px]"

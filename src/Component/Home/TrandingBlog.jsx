@@ -83,29 +83,29 @@ const TrandingBlog = () => {
             alt="image 2"
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-75 text-white p-4">
+          <div className="absolute inset-0 flex flex-col justify-center bg-black bg-opacity-75 text-white p-4">
             <Typography
               variant="h1"
               color="white"
-              className="mb-4 text-3xl text-center"
+              className="mb-4 text-sm lg:text-3xl text-center"
             >
               {article.title}
             </Typography>
             <Typography
               variant="lead"
               color="white"
-              className="mb-4 opacity-80 text-sm text-center"
+              className="mb-4 opacity-80 text-sm"
             >
               {truncateText(article.description, 40)}
             </Typography>
             <div className="flex justify-center">
               <NavLink to={`/blogdetails/${article._id}`}>
-                <Button onClick={() => handleCount(article._id)}>
+                <Button className="" onClick={() => handleCount(article._id)}>
                   Read more
                 </Button>
               </NavLink>
             </div>
-            <p className="mt-2 text-xs font-extrabold">
+            <p className="mt-2 text-xs font-extrabold justify-start flex">
               {article.count} view
             </p>
           </div>

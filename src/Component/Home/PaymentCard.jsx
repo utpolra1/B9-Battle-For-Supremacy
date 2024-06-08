@@ -7,8 +7,8 @@ const PaymentCard = () => {
   const price =100;
   return (
     <div className="mb-20">
-      <div className="flex justify-center space-x-4 p-8 bg-gray-900 rounded-lg text-white">
-        <div className="p-6 border-2 border-gray-600 rounded-lg w-64">
+      <div className="justify-center space-x-4 p-8 bg-gray-900 rounded-lg text-white grid lg:grid-cols-3 gap-3">
+        <div className="p-6 border-2 border-gray-600 rounded-lg h-[500px]">
           <h2 className="text-lg font-semibold">Premium Individual</h2>
           <p className="mt-4 text-pink-400">FREE FOR 1 MONTH</p>
           <p className="mt-2">$100.00 per month after.</p>
@@ -26,7 +26,7 @@ const PaymentCard = () => {
           </NavLink>
           </div>
         </div>
-        <div className="p-6 border-2 border-gray-600 rounded-lg w-64">
+        <div className="p-6 border-2 border-gray-600 rounded-lg h-[500px]">
           <h2 className="text-lg font-semibold">Premium Duo</h2>
           <p className="mt-4 text-yellow-400">$200.00 per month</p>
           <ul className="mt-4 space-y-2">
@@ -46,7 +46,7 @@ const PaymentCard = () => {
             For couples who reside at the same address.
           </p>
         </div>
-        <div className="p-6 border-2 border-gray-600 rounded-lg w-64">
+        <div className="p-6 border-2 border-gray-600 rounded-lg h-[500px]">
           <h2 className="text-lg font-semibold">Premium Family</h2>
           <p className="mt-4 text-blue-400">$250.00 per month</p>
           <ul className="mt-4 space-y-2">
