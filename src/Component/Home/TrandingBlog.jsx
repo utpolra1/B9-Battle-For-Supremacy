@@ -1,22 +1,9 @@
 import React, { useState } from "react";
-import { createRoot } from "react-dom/client";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
 import UseAxiosSecure from "../Axios/UseAxiosScoure";
 import { useQuery } from "@tanstack/react-query";
 import { NavLink } from "react-router-dom";
 import { Button } from "flowbite-react";
-
-// Loader Component
-const Loader = () => {
-  return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="flex justify-center items-center w-full h-screen">
-          <span className="loading loading-ring w-28 h-28"></span>
-        </div>
-    </div>
-  );
-};
+import { Carousel, Typography } from "@material-tailwind/react";
 
 // Helper function to truncate text
 const truncateText = (text, wordLimit) => {
@@ -53,7 +40,13 @@ const TrandingBlog = () => {
       });
   };
 
-  const { data: blogs = [], isLoading, isError, error, refetch } = useQuery({
+  const {
+    data: blogs = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery({
     queryKey: ["blogs"],
     queryFn: async () => {
       const res = await axiosSecure.get("/blog");
@@ -62,7 +55,7 @@ const TrandingBlog = () => {
   });
 
   if (isLoading) {
-    return <Loader />;
+    return <div>Loading...</div>;
   }
 
   if (isError) {
@@ -81,41 +74,40 @@ const TrandingBlog = () => {
 
   const topArticles = approvedArticles.slice(0, 5);
 
-  const onChange = (index, item) => {
-    console.log(`Item ${index} changed:`, item);
-  };
-
-  const onClickItem = (index, item) => {
-    console.log(`Item ${index} clicked:`, item);
-  };
-
-  const onClickThumb = (index, item) => {
-    console.log(`Thumbnail ${index} clicked:`, item);
-  };
-
   return (
-    <Carousel
-      showArrows={true}
-      onChange={onChange}
-      onClickItem={onClickItem}
-      onClickThumb={onClickThumb}
-    >
+    <Carousel className="rounded-xl">
       {topArticles.map((article, index) => (
-        <div key={index}>
-          <img src={article.image} alt={`Legend ${index + 1}`} />
-          <div className="legend">
-            <p className="text-white mb-3">{article.title}</p>
-            <h1>{truncateText(article?.description, 40)}</h1>
-            <div className="flex justify-end">
-              <NavLink to={`/blogdetails/${article?._id}`}>
-                <Button onClick={() => handleCount(article?._id)}>
+        <div key={index} className="relative h-full w-full">
+          <img
+            src={article?.image}
+            alt="image 2"
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-75 text-white p-4">
+            <Typography
+              variant="h1"
+              color="white"
+              className="mb-4 text-3xl text-center"
+            >
+              {article.title}
+            </Typography>
+            <Typography
+              variant="lead"
+              color="white"
+              className="mb-4 opacity-80 text-sm text-center"
+            >
+              {truncateText(article.description, 40)}
+            </Typography>
+            <div className="flex justify-center">
+              <NavLink to={`/blogdetails/${article._id}`}>
+                <Button onClick={() => handleCount(article._id)}>
                   Read more
                 </Button>
               </NavLink>
             </div>
-            <h1 className="justify-start flex items-center text-center font-extrabold">
-              {article?.count} view{" "}
-            </h1>
+            <p className="mt-2 text-xs font-extrabold">
+              {article.count} view
+            </p>
           </div>
         </div>
       ))}
@@ -124,12 +116,3 @@ const TrandingBlog = () => {
 };
 
 export default TrandingBlog;
-
-// Render the component
-const container = document.querySelector(".demo-carousel");
-if (container) {
-  const root = createRoot(container);
-  root.render(<TrandingBlog />);
-} else {
-  console.error("Target container is not a DOM element.");
-}

@@ -94,7 +94,7 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <PrivateAdmin><Dashboard /></PrivateAdmin>,
+    element: <PrivateAdmin><Dashboard></Dashboard></PrivateAdmin>,
     children: [
       {
         path: "allusers",
