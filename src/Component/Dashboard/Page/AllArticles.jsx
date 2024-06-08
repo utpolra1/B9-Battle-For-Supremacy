@@ -15,13 +15,31 @@ const AllArticles = () => {
     },
   });
   const handleMakeApprove = (blogs) => {
-    axiosSecure.patch(`/blog/aproved/${blogs._id}`).then((res) => {
-      console.log(res.data);
-      if (res.data.modifiedCount > 0) {
-        refetch();
-        toast.success("blog Approved Sucesss");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Approve!",
+    })
+    .then((result)=>{
+      if(result.isConfirmed){
+        axiosSecure.patch(`/blog/aproved/${blogs._id}`)
+        .then((res) => {
+          if (res.data.modifiedCount > 0) {
+            Swal.fire({
+              title: "Approved!",
+              text: "Your blog has been Approved.",
+              icon: "success",
+            });
+            refetch();
+            toast.success("blog Approved Sucesss");
+          }
+        });
       }
-    });
+    })
   };
 
   //handle delete
@@ -45,8 +63,6 @@ const AllArticles = () => {
                 text: "Your blog has been deleted.",
                 icon: "success",
               });
-
-              const remainingBlogs = blogs.filter((blog) => blog._id !== id);
               refetch();
             }
           })
@@ -58,6 +74,34 @@ const AllArticles = () => {
               icon: "error",
             });
           });
+      }
+    });
+  };
+
+  //blogs Decline
+  const handleDecline = (blogs) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, decline it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/blog/decline/${blogs._id}`).then((res) => {
+          console.log(blogs._id);
+          if (res.data.modifiedCount > 0) {
+            Swal.fire({
+              title: "Decline!",
+              text: "Your blog has been decline.",
+              icon: "success",
+            });
+            refetch();
+            toast.success("Blog Decline Success");
+          }
+        });
       }
     });
   };
@@ -116,7 +160,7 @@ const AllArticles = () => {
                   </button>
                 </Table.Cell>
                 <Table.Cell>
-                  <button className="btn">Decline</button>
+                  <button onClick={()=>handleDecline(blogs)} disabled={blogs?.status === "Decline"} className="btn">Decline</button>
                 </Table.Cell>
                 <Table.Cell>
                   <button

@@ -26,6 +26,7 @@ import { GiPrivate } from "react-icons/gi";
 import SubscribePremium from "./Component/PrivateRoute/SubCribePremium.jsx";
 import UserProfile from "./User/UserProfile.jsx";
 import PrivateAdmin from "./Component/PrivateRoute/PrivateAdmin.jsx";
+import AdminDashboard from "./Component/Dashboard/AdminDashboard.jsx";
 
 // Create the router configuration
 const router = createBrowserRouter([
@@ -96,6 +97,10 @@ const router = createBrowserRouter([
     path: "dashboard",
     element: <PrivateAdmin><Dashboard></Dashboard></PrivateAdmin>,
     children: [
+      {
+        path:"admindashboard",
+        element:<AdminDashboard></AdminDashboard>
+      },
       {
         path: "allusers",
         element: <AllUsers />,
