@@ -82,7 +82,7 @@ const Navbar = () => {
           href="#"
           className="mr-4 cursor-pointer py-1.5 font-medium"
         >
-          Material Tailwind
+          <NavLink className="bg-cyan-200 btn" to='/'>NewsPaper</NavLink>
         </Typography>
         <div className="hidden lg:block">{navList}</div>
         <div className="flex items-center gap-x-1">

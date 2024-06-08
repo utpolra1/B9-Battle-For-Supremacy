@@ -21,6 +21,18 @@ const BlogDeatils = () => {
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {data?.title}
         </h5>
+        <h1>
+          <span className="font-bold">Publish Date: </span>
+          {data?.date}
+        </h1>
+        <h1>
+          <span className="font-bold">Publisher: </span>
+          {data?.publisher}
+        </h1>
+        <h1 className="font-bold">
+          {data?.count}
+          <span> view</span>
+        </h1>
         <p className="font-normal text-gray-700 dark:text-gray-400">
           {data?.description}
         </p>

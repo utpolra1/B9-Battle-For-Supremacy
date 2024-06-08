@@ -75,13 +75,13 @@ const TrandingBlog = () => {
   const topArticles = approvedArticles.slice(0, 5);
 
   return (
-    <Carousel className="rounded-xl">
+    <Carousel className="rounded-xl lg:max-h-[800px]">
       {topArticles.map((article, index) => (
         <div key={index} className="relative h-full w-full">
           <img
             src={article?.image}
             alt="image 2"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover min-h-[350px] lg:max-h-[800px]"
           />
           <div className="absolute inset-0 flex flex-col justify-center bg-black bg-opacity-75 text-white p-4">
             <Typography
@@ -94,9 +94,9 @@ const TrandingBlog = () => {
             <Typography
               variant="lead"
               color="white"
-              className="mb-4 opacity-80 text-sm"
+              className="mb-4 opacity-80 text-sm text-center"
             >
-              {truncateText(article.description, 40)}
+              {truncateText(article.description, 20)}
             </Typography>
             <div className="flex justify-center">
               <NavLink to={`/blogdetails/${article._id}`}>
@@ -105,7 +105,7 @@ const TrandingBlog = () => {
                 </Button>
               </NavLink>
             </div>
-            <p className="mt-2 text-xs font-extrabold justify-start flex">
+            <p className="mt-2 text-xs font-extrabold items-center justify-evenly flex">
               {article.count} view
             </p>
           </div>

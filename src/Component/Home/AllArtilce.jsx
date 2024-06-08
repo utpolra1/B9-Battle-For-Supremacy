@@ -57,6 +57,9 @@ const AllArtilce = () => {
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               {blogs?.title}
             </h5>
+            <h1><span className="font-bold">Publish Date: </span>{blogs?.date}</h1>
+            <h1><span className="font-bold">Publisher: </span>{blogs?.publisher}</h1>
+            <h1 className="font-bold">{blogs?.count}<span> view</span></h1>
             <p className="font-normal text-gray-700 dark:text-gray-400">
               {truncateText(blogs?.description, 50)}
             </p>
