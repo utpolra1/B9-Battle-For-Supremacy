@@ -14,8 +14,9 @@ const UserStatic = () => {
   const paiduser = users.filter(users => users?.paid === 'paid'); // Use find instead of filter
   const normaluser =(users.length - paiduser.length);
   return (
-    <div>
-      <div className="stats shadow my-10 flex items-center">
+    <div className="my-16 text-center">
+      <h1 className="font-extrabold my-3">User Stage</h1>
+      <div className="stats shadow flex items-center">
         <div className="stat place-items-center">
           <div className="stat-title">All user</div>
           <div className="stat-value">{users?.length}</div>

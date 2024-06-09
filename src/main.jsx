@@ -27,13 +27,14 @@ import SubscribePremium from "./Component/PrivateRoute/SubCribePremium.jsx";
 import UserProfile from "./User/UserProfile.jsx";
 import PrivateAdmin from "./Component/PrivateRoute/PrivateAdmin.jsx";
 import AdminDashboard from "./Component/Dashboard/AdminDashboard.jsx";
+import ErrorElement from "./Component/ErrorElements/ErrorElement.jsx";
 
 // Create the router configuration
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Router />,
-    errorElement: <></>,
+    errorElement: <ErrorElement></ErrorElement>,
     children: [
       {
         path: "/",

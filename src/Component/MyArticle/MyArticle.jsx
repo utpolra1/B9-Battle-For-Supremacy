@@ -84,9 +84,9 @@ const MyArticle = () => {
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {index + 1}
                 </Table.Cell>
-                <Table.Cell>{data.title}</Table.Cell>
-                <Table.Cell>{data.status}</Table.Cell>
-                <Table.Cell>{data.isPremium ? "Yes" : "No"}</Table.Cell>
+                <Table.Cell>{data?.title}</Table.Cell>
+                <Table.Cell>{data?.status}</Table.Cell>
+                <Table.Cell>{data?.paid}</Table.Cell>
                 <Table.Cell>
                   <NavLink to={`/blogdetails/${data?._id}`}>
                     <ViewDatilsButton articleId={data?._id}></ViewDatilsButton>

@@ -1,13 +1,13 @@
 import React, { createContext, useEffect, useState } from "react";
 import {
-  GoogleAuthProvider,
-  createUserWithEmailAndPassword,
   getAuth,
+  signOut,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile as firebaseUpdateProfile,
   signInWithPopup,
-  signOut,
-  updateProfile,
+  GoogleAuthProvider,
 } from "firebase/auth";
 import App from "./firebase.config";
 import axios from "axios";
@@ -64,11 +64,11 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, provider);
   };
 
-  const updateProfilec = (name, photo) => {
-    return updateProfile(auth.currentUser, {
-      displayName: name,
-      photoURL: photo,
-    });
+  const updateProfile = (profile) => {
+    if (auth.currentUser) {
+      return firebaseUpdateProfile(auth.currentUser, profile);
+    }
+    return Promise.reject(new Error("No user is signed in"));
   };
 
   const login = (email, password) => {
@@ -91,7 +91,7 @@ const AuthProvider = ({ children }) => {
   const AuthInfo = {
     user,
     createUser,
-    updateProfilec,
+    updateProfile,
     login,
     googleLogin,
     logout,

@@ -48,7 +48,7 @@ const AllArticle = () => {
   };
 
   return (
-    <div>
+    <div className="my-10">
       <div className="justify-center py-5 grid gap-3 lg:grid-cols-3">
         <select
           onChange={(e) => setFilter(e.target.value)}
@@ -102,6 +102,11 @@ const AllArticle = () => {
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {article.title}
               </h5>
+              <div>
+              <h1><span className="font-bold">Publish Date: </span>{article?.date}</h1>
+            <h1><span className="font-bold">Publisher: </span>{article?.publisher}</h1>
+            <h1 className="font-bold">{article?.count}<span> view</span></h1>
+              </div>
               <p className="font-normal text-gray-700 dark:text-gray-400">
               {truncateText(article?.description, 40)}
               </p>

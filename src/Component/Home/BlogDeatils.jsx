@@ -17,7 +17,7 @@ const BlogDeatils = () => {
   return (
     <div>
       <Card>
-        <img className="w-96 rounded-lg h-64" src={data?.image} alt="" />
+        <img className="rounded-lg lg:h-[500px]" src={data?.image} alt="" />
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {data?.title}
         </h5>

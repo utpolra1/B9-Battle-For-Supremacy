@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import {
   MobileNav,
   Typography,
-  Button,
   IconButton,
   Tooltip,
 } from "@material-tailwind/react";
@@ -10,11 +9,13 @@ import { NavLink } from "react-router-dom";
 import { authContext } from "../Firebase/AuthProvider";
 import UseAxiosSecure from "../Component/Axios/UseAxiosScoure";
 import { useQuery } from "@tanstack/react-query";
+import { Button } from "flowbite-react";
 
 const Navbar = () => {
   const [openNav, setOpenNav] = useState(false);
   const { user, logout } = useContext(authContext);
   const axiosSecure = UseAxiosSecure();
+  console.log(user)
 
   const { data: users = [] } = useQuery({
     queryKey: ["users"],
@@ -82,7 +83,7 @@ const Navbar = () => {
           href="#"
           className="mr-4 cursor-pointer py-1.5 font-medium"
         >
-          <NavLink className="bg-cyan-200 btn" to='/'>NewsPaper</NavLink>
+          <NavLink className='text-2xl font-extrabold font-family:Georgia' to='/'>NewsPaper</NavLink>
         </Typography>
         <div className="hidden lg:block">{navList}</div>
         <div className="flex items-center gap-x-1">
@@ -94,7 +95,7 @@ const Navbar = () => {
                     <Tooltip content={user.displayName}>
                       <NavLink to='/userprofile'>
                         <button className="avatar online">
-                          <img alt="" src={user.photoURL} />
+                          <img alt="" className="rounded-full w-4 h-8" src={user?.photoURl || loggedInUser.photo} />
                         </button>
                       </NavLink>
                     </Tooltip>
@@ -103,20 +104,20 @@ const Navbar = () => {
               </div>
             ) : (
               <NavLink to="/login">
-                <button className="bg-blue-gray-500 w-20 h-10 rounded-lg">
+                <Button className="w-20 h-10 rounded-lg">
                   Login
-                </button>
+                </Button>
               </NavLink>
             )}
           </div>
           <div>
             {user && (
               <div>
-                <button className="bg-blue-gray-500 w-20 h-10 rounded-lg btn-active font-bold">
+                <Button className="w-20 h-10 rounded-lg btn-active font-bold">
                   <a className="" onClick={hanlelogout}>
                     Logout
                   </a>
-                </button>
+                </Button>
               </div>
             )}
           </div>
