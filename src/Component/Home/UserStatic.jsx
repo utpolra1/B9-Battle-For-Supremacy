@@ -1,6 +1,7 @@
 import React from "react";
 import UseAxiosSecure from "../Axios/UseAxiosScoure";
 import { useQuery } from "@tanstack/react-query";
+import 'aos/dist/aos.css';
 
 const UserStatic = () => {
   const axiosSecure = UseAxiosSecure();
@@ -14,7 +15,7 @@ const UserStatic = () => {
   const paiduser = users.filter(users => users?.paid === 'paid'); // Use find instead of filter
   const normaluser =(users.length - paiduser.length);
   return (
-    <div className="my-16 text-center">
+    <div className="my-16 text-center" data-aos="flip-right">
       <h1 className="font-extrabold my-3">User Stage</h1>
       <div className="stats shadow flex items-center">
         <div className="stat place-items-center">

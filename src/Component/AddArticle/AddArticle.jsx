@@ -10,8 +10,8 @@ const AddArticle = () => {
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const { user } = useContext(authContext);
-  const location=useLocation();
-  const navigate=useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
@@ -53,7 +53,7 @@ const AddArticle = () => {
     const username = user?.displayName;
     const userphoto = user?.photoURL;
     const date = new Date().toLocaleString();
-    const paid='unpaid';
+    const paid = "unpaid";
     const newblog = {
       title,
       description,
@@ -66,10 +66,10 @@ const AddArticle = () => {
       username,
       userphoto,
       date,
-      paid
+      paid,
     };
 
-    fetch("http://localhost:5000/blog", {
+    fetch("https://b9-battle-for-supremacy-server.vercel.app/blog", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -87,12 +87,17 @@ const AddArticle = () => {
 
   return (
     <div className="flex justify-center text-center mt-5">
-      <div className="relative flex flex-col text-gray-700 bg-transparent shadow-none rounded-xl bg-clip-border">
+      <div className="relative flex flex-col text-gray-700 bg-transparent shadow-none rounded-xl bg-clip-border bg-light-green-50 p-8 my-5" data-aos="flip-left"
+     data-aos-easing="ease-out-cubic"
+     data-aos-duration="2000">
         <h4 className="block font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900 border-b-2">
           Add Article
         </h4>
 
-        <form onSubmit={handleSubmitedArticle} className="max-w-screen-lg mt-8 mb-2 w-80 sm:w-96">
+        <form
+          onSubmit={handleSubmitedArticle}
+          className="max-w-screen-lg mt-8 mb-2 w-80 sm:w-96"
+        >
           <div className="flex flex-col gap-6 mb-1">
             <h6 className="block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
               Title
@@ -154,12 +159,20 @@ const AddArticle = () => {
               Image Upload
             </h6>
             <div className="relative h-11 w-full min-w-[200px]">
-              <input type="file" accept="image/*" onChange={handleImageUpload} required />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                required
+              />
             </div>
           </div>
 
           <div className="inline-flex items-center">
-            <label className="relative -ml-2.5 flex cursor-pointer items-center rounded-full p-3" htmlFor="remember">
+            <label
+              className="relative -ml-2.5 flex cursor-pointer items-center rounded-full p-3"
+              htmlFor="remember"
+            >
               <input
                 type="checkbox"
                 className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:bg-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
@@ -183,7 +196,10 @@ const AddArticle = () => {
                 </svg>
               </span>
             </label>
-            <label className="mt-px font-light text-gray-700 cursor-pointer select-none" htmlFor="remember">
+            <label
+              className="mt-px font-light text-gray-700 cursor-pointer select-none"
+              htmlFor="remember"
+            >
               Remember me
             </label>
           </div>

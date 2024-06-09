@@ -6,10 +6,10 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
-import { authContext } from "../Firebase/AuthProvider";
 import UseAxiosSecure from "../Component/Axios/UseAxiosScoure";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "flowbite-react";
+import { authContext } from "../Firebase/AuthProvider";
 
 const Navbar = () => {
   const [openNav, setOpenNav] = useState(false);
@@ -95,7 +95,7 @@ const Navbar = () => {
                     <Tooltip content={user.displayName}>
                       <NavLink to='/userprofile'>
                         <button className="avatar online">
-                          <img alt="" className="rounded-full w-4 h-8" src={user?.photoURl || loggedInUser.photo} />
+                          <img alt="" className="rounded-full w-4 h-8" src={user?.photoURL} />
                         </button>
                       </NavLink>
                     </Tooltip>

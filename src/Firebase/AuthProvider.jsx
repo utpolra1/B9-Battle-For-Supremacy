@@ -19,7 +19,7 @@ const auth = getAuth(App);
 
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
-  const [user, setuser] = useState(null);
+  const [user, setuser] = useState("");
 
   // save user
   const saveUser = async (user) => {
@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
     };
     try {
       const { data } = await axios.put(
-        "http://localhost:5000/user",
+        "https://b9-battle-for-supremacy-server.vercel.app/user",
         currentUser
       );
       return data;

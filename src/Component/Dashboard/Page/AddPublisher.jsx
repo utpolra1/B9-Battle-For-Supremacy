@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { authContext } from "../../../Firebase/AuthProvider";
 import { toast } from "react-toastify";
@@ -11,7 +11,7 @@ const AddPublisher = () => {
   const [uploading, setUploading] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const { user } = useContext(authContext);
-  
+
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     setPublisherLogo(file);
@@ -46,7 +46,10 @@ const AddPublisher = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/publishers", publisherData); // Replace with your backend endpoint
+      await axios.post(
+        "https://b9-battle-for-supremacy-server.vercel.app/publishers",
+        publisherData
+      ); // Replace with your backend endpoint
       toast.success("Publisher added successfully");
       setPublisherName("");
       setPublisherLogo(null);
@@ -70,9 +73,11 @@ const AddPublisher = () => {
   });
 
   return (
-    <div className="container mx-auto p-4">
+    <div
+      className="container mx-auto p-4"
+    >
       <h2 className="text-2xl font-bold mb-4">Add Publisher</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="">
         <div className="mb-4">
           <label
             htmlFor="publisherName"

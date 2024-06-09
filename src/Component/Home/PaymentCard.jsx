@@ -1,12 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import 'aos/dist/aos.css';
 
 const PaymentCard = () => {
   const price1=250;
   const price2=200;
   const price =100;
   return (
-    <div className="mb-20">
+    <div className="mb-20" data-aos="flip-left"
+    data-aos-easing="ease-out-cubic"
+    data-aos-duration="2000">
       <div className="justify-center space-x-4 p-8 bg-gray-900 rounded-lg text-white grid lg:grid-cols-3 gap-3">
         <div className="p-6 border-2 border-gray-600 rounded-lg h-[500px]">
           <h2 className="text-lg font-semibold">Premium Individual</h2>

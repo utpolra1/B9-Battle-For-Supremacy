@@ -19,7 +19,7 @@ const TrandingBlog = () => {
   const [count, setCount] = useState("1");
 
   const handleCount = (id) => {
-    fetch(`http://localhost:5000/blog/${id}`, {
+    fetch(`https://b9-battle-for-supremacy-server.vercel.app/blog/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,9 @@ const TrandingBlog = () => {
   const topArticles = approvedArticles.slice(0, 5);
 
   return (
-    <Carousel className="rounded-xl lg:max-h-[800px]">
+    <Carousel className="rounded-xl lg:max-h-[800px]" data-aos="flip-left"
+    data-aos-easing="ease-out-cubic"
+    data-aos-duration="2000">
       {topArticles.map((article, index) => (
         <div key={index} className="relative h-full w-full">
           <img
@@ -88,6 +90,7 @@ const TrandingBlog = () => {
               variant="h1"
               color="white"
               className="mb-4 text-sm lg:text-3xl text-center"
+              data-aos="fade-left"
             >
               {article.title}
             </Typography>
@@ -95,6 +98,7 @@ const TrandingBlog = () => {
               variant="lead"
               color="white"
               className="mb-4 opacity-80 text-sm text-center"
+              data-aos="fade-left"
             >
               {truncateText(article.description, 20)}
             </Typography>
